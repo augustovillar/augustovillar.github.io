@@ -310,19 +310,47 @@
 
         .footer-content {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-text-column {
+            flex-grow: 1;
+            text-align: left;
+        }
+
+        .footer-text-column p {
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+            color: #cccccc;
+        }
+
+        .footer-text-column a {
+            color: #ADD8E6;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-text-column a:hover {
+            color: #E0FFFF;
+            text-decoration: underline;
         }
 
         .footer-logos {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             align-items: center;
+            background-color: #ffffff;
+            padding: 8px 15px;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
         }
 
         .footer-logo {
-            height: 40px;
+            height: 35px;
             width: auto;
             object-fit: contain;
         }
@@ -353,6 +381,16 @@
 
             .example-image {
                 height: 120px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .footer-text-column {
+                text-align: center;
             }
         }
 
@@ -399,7 +437,6 @@
                                          class="option-icon">
                                 </div>
                                 <span class="option-text">Memory Reconstruction</span>
-                                <p class="option-brief">Generate Images from a Story</p>
                                 <p class="option-description">
                                     Tell us a story or memory, and our AI will divide it into meaningful sections. 
                                     For each section, the system searches for related artworks from our curated databases, 
@@ -459,7 +496,6 @@
                                          class="option-icon">
                                 </div>
                                 <span class="option-text">Art Exploration</span>
-                                <p class="option-brief">Search for Art using Keywords</p>
                                 <p class="option-description">
                                     Enter keywords related to themes you want to explore. The system finds matching artworks 
                                     from our curated databases, and the AI generates a personalized story connecting your 
@@ -547,6 +583,9 @@
     <footer>
         <div class="container">
             <div class="footer-content">
+                <div class="footer-text-column">
+                    <p>&copy; 2025 <a href="mailto:augubvs@gmail.com">Augusto B. V. Silva</a>, <a href="mailto:alvarenga.vinicius@usp.br">Vinicius Alvarenga</a>. All rights reserved.</p>
+                </div>
                 <div class="footer-logos">
                     <img src="./images/USP.jpg" alt="USP" class="footer-logo">
                     <img src="./images/logoucl.png" alt="UCL" class="footer-logo">
