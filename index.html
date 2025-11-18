@@ -4,379 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ArtEvoke - Art and Memory through AI</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #fafafa;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        header {
-            background-color: #fff;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #555;
-            transition: color 0.3s;
-            font-weight: 500;
-        }
-
-        .nav-links a:hover {
-            color: #667eea;
-        }
-
-        .hero-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 4rem 0;
-            text-align: center;
-        }
-
-        .hero-title {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .hero-subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            opacity: 0.95;
-        }
-
-        .hero-authors {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-
-        .hero-affiliations {
-            font-size: 0.95rem;
-            margin-bottom: 2rem;
-            opacity: 0.85;
-        }
-
-        .hero-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-
-        .hero-link {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background-color: rgba(255, 255, 255, 0.2);
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            transition: background-color 0.3s;
-            font-weight: 500;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .hero-link:hover {
-            background-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .content-section {
-            background-color: #fff;
-            padding: 3rem 0;
-            margin: 2rem 0;
-        }
-
-        .section-title {
-            font-size: 2rem;
-            color: #2c3e50;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 3px solid #667eea;
-        }
-
-        .abstract {
-            background-color: #f8f9fa;
-            padding: 2rem;
-            border-radius: 8px;
-            border-left: 4px solid #667eea;
-            margin: 2rem 0;
-        }
-
-        .abstract p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #555;
-            text-align: justify;
-        }
-
-        .video-container {
-            position: relative;
-            width: 100%;
-            max-width: 900px;
-            margin: 2rem auto;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            height: 0;
-            overflow: hidden;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .video-placeholder {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-        }
-
-        .framework-section {
-            margin: 2rem 0;
-        }
-
-        .framework-image {
-            width: 100%;
-            max-width: 1000px;
-            margin: 2rem auto;
-            display: block;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .result-card {
-            background-color: #fff;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .result-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-        }
-
-        .result-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .result-content {
-            padding: 1.5rem;
-        }
-
-        .result-title {
-            font-size: 1.2rem;
-            color: #2c3e50;
-            margin-bottom: 0.5rem;
-        }
-
-        .result-description {
-            color: #666;
-            line-height: 1.6;
-        }
-
-        .bibtex-section {
-            background-color: #f8f9fa;
-            padding: 2rem;
-            border-radius: 8px;
-            margin: 2rem 0;
-        }
-
-        .bibtex-code {
-            background-color: #2c3e50;
-            color: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 6px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            line-height: 1.6;
-            overflow-x: auto;
-            white-space: pre;
-        }
-
-        .acknowledgement {
-            background-color: #f8f9fa;
-            padding: 2rem;
-            border-radius: 8px;
-            margin: 2rem 0;
-        }
-
-        .acknowledgement p {
-            color: #555;
-            line-height: 1.8;
-        }
-
-        footer {
-            background-color: #2c3e50;
-            color: white;
-            padding: 2rem 0;
-            text-align: center;
-            margin-top: 3rem;
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .footer-text {
-            flex-grow: 1;
-            text-align: left;
-        }
-
-        .footer-text p {
-            font-size: 0.9rem;
-            margin: 0.5rem 0;
-            color: #cccccc;
-        }
-
-        .footer-text a {
-            color: #ADD8E6;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-text a:hover {
-            color: #E0FFFF;
-            text-decoration: underline;
-        }
-
-        .footer-logos {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            background-color: #ffffff;
-            padding: 8px 15px;
-            border-radius: 6px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            flex-shrink: 0;
-        }
-
-        .footer-logo {
-            height: 35px;
-            width: auto;
-            object-fit: contain;
-        }
-
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 1.8rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1.2rem;
-            }
-
-            .hero-links {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .hero-link {
-                width: 200px;
-                text-align: center;
-            }
-
-            .section-title {
-                font-size: 1.5rem;
-            }
-
-            .results-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .footer-text {
-                text-align: center;
-            }
-        }
-
-        .text-content {
-            color: #555;
-            line-height: 1.8;
-            margin: 1rem 0;
-        }
-
-        .text-content p {
-            margin-bottom: 1rem;
-        }
-
-        .text-content ul, .text-content ol {
-            margin-left: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .text-content li {
-            margin-bottom: 0.5rem;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
@@ -465,22 +93,42 @@
                 <h3 style="margin: 2rem 0 1rem; color: #2c3e50; font-size: 1.5rem;">Memory Reconstruction</h3>
                 <div class="text-content">
                     <p>
-                        In Memory Reconstruction mode, users provide a story or memory, and the AI divides it into meaningful sections. For each section, the system searches for related artworks from our curated databases, helping users visualize and recall their memories through art.
+                        Tell us a story or memory, and our AI will divide it into meaningful sections. 
+                        For each section, the system searches for related artworks from our curated databases, 
+                        helping you visualize and recall your memories through art.
                     </p>
                 </div>
-                <div class="results-grid">
-                    <div class="result-card">
-                        <img src="./images/mr_example/image0_0.jpg" alt="Memory Reconstruction Example 1" class="result-image">
-                        <div class="result-content">
-                            <h4 class="result-title">Section 1: Urban Landscape</h4>
-                            <p class="result-description">Artworks matching urban and cityscape themes from user stories.</p>
+
+                <div class="example-section">
+                    <h4>Example</h4>
+                    <div class="example-story">
+                        <p>The city towers glimmered above me like steel giants. I wandered toward the quiet outskirts where the noise softened. Sunlight spilled across open fields, turning everything warm and golden. Wildflowers brushed my legs as colors replaced concrete. And at last, a still blue lake opened before me.</p>
+                    </div>
+                    <p class="example-description">The AI divides your story into sections and finds related images:</p>
+                    
+                    <div class="section-item">
+                        <h5>Section 1</h5>
+                        <p class="section-text">"The city towers glimmered above me like steel giants. I wandered toward the quiet outskirts where the noise softened. Sunlight spilled across open fields, turning everything warm and golden."</p>
+                        <div class="example-images">
+                            <img src="./images/mr_example/image0_0.jpg" alt="Via Appia at Sunset" class="example-image">
+                            <img src="./images/mr_example/image0_1.jpg" alt="View Over Town at Sunset" class="example-image">
+                            <img src="./images/mr_example/image0_2.jpg" alt="The Tuileries Study" class="example-image">
+                            <img src="./images/mr_example/image0_3.jpg" alt="Bridge at Posilippo" class="example-image">
+                            <img src="./images/mr_example/image0_4.jpg" alt="View of Moscow" class="example-image">
+                            <img src="./images/mr_example/image0_5.jpg" alt="Road to Berneval" class="example-image">
                         </div>
                     </div>
-                    <div class="result-card">
-                        <img src="./images/mr_example/image1_0.jpg" alt="Memory Reconstruction Example 2" class="result-image">
-                        <div class="result-content">
-                            <h4 class="result-title">Section 2: Natural Scenery</h4>
-                            <p class="result-description">Artworks matching natural landscapes and outdoor scenes.</p>
+
+                    <div class="section-item">
+                        <h5>Section 2</h5>
+                        <p class="section-text">"Sunlight spilled across open fields, turning everything warm and golden. Wildflowers brushed my legs as colors replaced concrete. And at last, a still blue lake opened before me."</p>
+                        <div class="example-images">
+                            <img src="./images/mr_example/image1_0.jpg" alt="July Afternoon" class="example-image">
+                            <img src="./images/mr_example/image1_1.jpg" alt="Meadow on the Edge of a Forest" class="example-image">
+                            <img src="./images/mr_example/image1_2.jpg" alt="Grass" class="example-image">
+                            <img src="./images/mr_example/image1_3.jpg" alt="Shinnecock Hills Peconic Bay" class="example-image">
+                            <img src="./images/mr_example/image1_4.jpg" alt="Oat and Poppy Field Giverny" class="example-image">
+                            <img src="./images/mr_example/image1_5.jpg" alt="Poppy Garden" class="example-image">
                         </div>
                     </div>
                 </div>
@@ -488,23 +136,31 @@
                 <h3 style="margin: 2rem 0 1rem; color: #2c3e50; font-size: 1.5rem;">Art Exploration</h3>
                 <div class="text-content">
                     <p>
-                        In Art Exploration mode, users enter keywords related to themes they want to explore. The system finds matching artworks from curated databases, and the AI generates a personalized story connecting the chosen pieces, creating a unique narrative journey through art.
+                        Enter keywords related to themes you want to explore. The system finds matching artworks 
+                        from our curated databases, and the AI generates a personalized story connecting your 
+                        chosen pieces, creating a unique narrative journey through art.
                     </p>
                 </div>
-                <div class="results-grid">
-                    <div class="result-card">
-                        <img src="./images/ae_example/image0.jpg" alt="Art Exploration Example 1" class="result-image">
-                        <div class="result-content">
-                            <h4 class="result-title">Keyword-based Search</h4>
-                            <p class="result-description">Artworks retrieved based on user-specified keywords and themes.</p>
+
+                <div class="example-section">
+                    <h4>Example</h4>
+                    <div class="keywords-section">
+                        <h5>Keywords Entered:</h5>
+                        <div class="keywords-list">
+                            <span class="keyword-tag">garden</span>
+                            <span class="keyword-tag">children</span>
+                            <span class="keyword-tag">beautiful city</span>
                         </div>
                     </div>
-                    <div class="result-card">
-                        <img src="./images/ae_example/image1.jpg" alt="Art Exploration Example 2" class="result-image">
-                        <div class="result-content">
-                            <h4 class="result-title">Story Generation</h4>
-                            <p class="result-description">AI-generated narratives connecting selected artworks into cohesive stories.</p>
-                        </div>
+                    <p class="example-description">The system finds artworks related to your keywords:</p>
+                    <div class="example-images">
+                        <img src="./images/ae_example/image0.jpg" alt="La Verja" class="example-image">
+                        <img src="./images/ae_example/image1.jpg" alt="Newcomers" class="example-image">
+                        <img src="./images/ae_example/image2.jpg" alt="Design for Final Backcloth" class="example-image">
+                    </div>
+                    <p class="example-description">Based on the selected images, the AI generates a story:</p>
+                    <div class="example-story">
+                        <p>In the vibrant city of Paris, newcomers arrived in 1934, carrying dreams and stories from their homeland. Among them was La Verja, a spirited young artist whose eyes danced with the colors of her memories. As they settled into their cozy apartment, the city buzzed with life and excitement. La Verja found solace in painting, capturing the essence of Paris in every stroke. One sunny afternoon, she painted a lively scene of the Seine River, with boats gliding past the Eiffel Tower. Her artwork soon became a cherished piece in the neighborhood, bringing joy to many.</p>
                     </div>
                 </div>
             </div>
@@ -514,7 +170,7 @@
             <div class="container">
                 <h2 class="section-title">BibTeX</h2>
                 <div class="bibtex-section">
-                    <div class="bibtex-code">@article{silva2024artevoke,
+                    <div class="bibtex-code">@article{silvaalvarenga2024artevoke,
   title={ArtEvoke: Art and Memory through AI - Supporting Non-Drug Interventions for Alzheimer's Disease},
   author={Silva, Augusto B. V. and Alvarenga, Vinicius},
   journal={},
