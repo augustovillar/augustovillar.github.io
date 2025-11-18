@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArtEvoke - Art and Memory through AI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #667eea;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.95;
+        }
+
+        .options-section {
+            padding: 4rem 0;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .option-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .option-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+        }
+
+        .option-icon-wrapper {
+            width: 100%;
+            height: 250px;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+
+        .option-icon {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .option-text {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #2c3e50;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .option-brief {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .option-description {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .how-it-works {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .how-it-works h3 {
+            color: #2c3e50;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .how-it-works ol {
+            margin-left: 1.5rem;
+            color: #555;
+        }
+
+        .how-it-works li {
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+        }
+
+        .example-section {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .example-section h4 {
+            color: #2c3e50;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .example-story {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            margin-bottom: 1rem;
+            font-style: italic;
+            color: #444;
+            line-height: 1.8;
+        }
+
+        .example-description {
+            color: #666;
+            font-size: 0.95rem;
+            margin: 1rem 0;
+        }
+
+        .section-item {
+            margin-bottom: 2rem;
+        }
+
+        .section-item h5 {
+            color: #667eea;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-text {
+            color: #555;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 6px;
+            line-height: 1.6;
+        }
+
+        .example-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .example-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .example-image:hover {
+            transform: scale(1.05);
+        }
+
+        .keywords-section {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .keywords-list {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .keyword-tag {
+            background: #667eea;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .content-box {
+            background: white;
+            border-radius: 12px;
+            padding: 3rem;
+            margin: 3rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .content-box h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 2rem;
+        }
+
+        .content-box h2 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin: 2rem 0 1rem;
+        }
+
+        .content-box p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            color: #555;
+            text-align: justify;
+        }
+
+        .content-box a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .content-box a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-content p {
+            margin: 0.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-box {
+                padding: 2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .example-images {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+
+            .example-image {
+                height: 120px;
+            }
+        }
+
+        section {
+            scroll-margin-top: 80px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">ArtEvoke</div>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link active" data-section="home">Home</a></li>
+                <li><a href="#about" class="nav-link" data-section="about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div id="home-section">
+            <section id="home">
+                <div class="hero-section">
+                    <div class="container">
+                        <h1 class="hero-title">Welcome to ArtEvoke</h1>
+                        <p class="hero-description">
+                            An innovative platform that connects art and memory through AI. Discover artworks that resonate with your stories or explore art to create new narratives.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="options-section">
+                    <div class="container">
+                        <div class="options-grid">
+                            <!-- Memory Reconstruction Card -->
+                            <div class="option-card">
+                                <div class="option-icon-wrapper">
+                                    <img src="./images/mr_example/image0_0.jpg" 
+                                         alt="Memory Reconstruction" 
+                                         class="option-icon">
+                                </div>
+                                <span class="option-text">Memory Reconstruction</span>
+                                <p class="option-brief">Generate Images from a Story</p>
+                                <p class="option-description">
+                                    Tell us a story or memory, and our AI will divide it into meaningful sections. 
+                                    For each section, the system searches for related artworks from our curated databases, 
+                                    helping you visualize and recall your memories through art.
+                                </p>
+
+                                <div class="how-it-works">
+                                    <h3>How It Works</h3>
+                                    <ol>
+                                        <li>Tell us a story or memory that you'd like to explore</li>
+                                        <li>The AI divides your story into meaningful sections</li>
+                                        <li>For each section, the system searches for related artworks</li>
+                                        <li>Choose the image that best matches each section of your story</li>
+                                    </ol>
+                                </div>
+
+                                <div class="example-section">
+                                    <h4>Example</h4>
+                                    <div class="example-story">
+                                        <p>The city towers glimmered above me like steel giants. I wandered toward the quiet outskirts where the noise softened. Sunlight spilled across open fields, turning everything warm and golden. Wildflowers brushed my legs as colors replaced concrete. And at last, a still blue lake opened before me.</p>
+                                    </div>
+                                    <p class="example-description">The AI divides your story into sections and finds related images:</p>
+                                    
+                                    <div class="section-item">
+                                        <h5>Section 1</h5>
+                                        <p class="section-text">"The city towers glimmered above me like steel giants. I wandered toward the quiet outskirts where the noise softened. Sunlight spilled across open fields, turning everything warm and golden."</p>
+                                        <div class="example-images">
+                                            <img src="./images/mr_example/image0_0.jpg" alt="Via Appia at Sunset" class="example-image">
+                                            <img src="./images/mr_example/image0_1.jpg" alt="View Over Town at Sunset" class="example-image">
+                                            <img src="./images/mr_example/image0_2.jpg" alt="The Tuileries Study" class="example-image">
+                                            <img src="./images/mr_example/image0_3.jpg" alt="Bridge at Posilippo" class="example-image">
+                                            <img src="./images/mr_example/image0_4.jpg" alt="View of Moscow" class="example-image">
+                                            <img src="./images/mr_example/image0_5.jpg" alt="Road to Berneval" class="example-image">
+                                        </div>
+                                    </div>
+
+                                    <div class="section-item">
+                                        <h5>Section 2</h5>
+                                        <p class="section-text">"Sunlight spilled across open fields, turning everything warm and golden. Wildflowers brushed my legs as colors replaced concrete. And at last, a still blue lake opened before me."</p>
+                                        <div class="example-images">
+                                            <img src="./images/mr_example/image1_0.jpg" alt="July Afternoon" class="example-image">
+                                            <img src="./images/mr_example/image1_1.jpg" alt="Meadow on the Edge of a Forest" class="example-image">
+                                            <img src="./images/mr_example/image1_2.jpg" alt="Grass" class="example-image">
+                                            <img src="./images/mr_example/image1_3.jpg" alt="Shinnecock Hills Peconic Bay" class="example-image">
+                                            <img src="./images/mr_example/image1_4.jpg" alt="Oat and Poppy Field Giverny" class="example-image">
+                                            <img src="./images/mr_example/image1_5.jpg" alt="Poppy Garden" class="example-image">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Art Exploration Card -->
+                            <div class="option-card">
+                                <div class="option-icon-wrapper">
+                                    <img src="./images/ae_example/image0.jpg" 
+                                         alt="Art Exploration" 
+                                         class="option-icon">
+                                </div>
+                                <span class="option-text">Art Exploration</span>
+                                <p class="option-brief">Search for Art using Keywords</p>
+                                <p class="option-description">
+                                    Enter keywords related to themes you want to explore. The system finds matching artworks 
+                                    from our curated databases, and the AI generates a personalized story connecting your 
+                                    chosen pieces, creating a unique narrative journey through art.
+                                </p>
+
+                                <div class="how-it-works">
+                                    <h3>How It Works</h3>
+                                    <ol>
+                                        <li>Enter keywords related to themes you want to explore</li>
+                                        <li>The system searches for artworks matching your keywords</li>
+                                        <li>Select the images that resonate with you</li>
+                                        <li>The AI generates a personalized story connecting your chosen artworks</li>
+                                    </ol>
+                                </div>
+
+                                <div class="example-section">
+                                    <h4>Example</h4>
+                                    <div class="keywords-section">
+                                        <h5>Keywords Entered:</h5>
+                                        <div class="keywords-list">
+                                            <span class="keyword-tag">garden</span>
+                                            <span class="keyword-tag">children</span>
+                                            <span class="keyword-tag">beautiful city</span>
+                                        </div>
+                                    </div>
+                                    <p class="example-description">The system finds artworks related to your keywords:</p>
+                                    <div class="example-images">
+                                        <img src="./images/ae_example/image0.jpg" alt="La Verja" class="example-image">
+                                        <img src="./images/ae_example/image1.jpg" alt="Newcomers" class="example-image">
+                                        <img src="./images/ae_example/image2.jpg" alt="Design for Final Backcloth" class="example-image">
+                                    </div>
+                                    <p class="example-description">Based on the selected images, the AI generates a story:</p>
+                                    <div class="example-story">
+                                        <p>In the vibrant city of Paris, newcomers arrived in 1934, carrying dreams and stories from their homeland. Among them was La Verja, a spirited young artist whose eyes danced with the colors of her memories. As they settled into their cozy apartment, the city buzzed with life and excitement. La Verja found solace in painting, capturing the essence of Paris in every stroke. One sunny afternoon, she painted a lively scene of the Seine River, with boats gliding past the Eiffel Tower. Her artwork soon became a cherished piece in the neighborhood, bringing joy to many.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="about-section" class="hidden">
+            <section id="about">
+                <div class="container">
+                    <div class="content-box">
+                        <h1>About ArtEvoke</h1>
+                        <p>
+                            This thesis explores how artificial intelligence can support non-drug interventions for people living with Alzheimer's disease through the use of visual stimuli and art. We present the development and integration of ArtEvoke, a prototype platform that combines large multimodal models (LMMs), large language models (LLMs), and embedding-based vector search to connect personal stories with curated artworks.
+                        </p>
+                        <p>
+                            Building upon foundational research from a <a href='https://thesis.dial.uclouvain.be/entities/masterthesis/579c4760-996b-4b3b-ba39-3ea7caf05ab8' target='_blank' rel='noopener noreferrer'>Master's thesis by Augusto B. V. Silva and Marc Bejjani</a> at Université Catholique de Louvain, which benchmarked the core AI models, this work focuses on integrating these components into a functional prototype and introducing a novel clinical evaluation framework. Designed to assist memory recall and cognitive engagement, ArtEvoke generates personalized visual narratives or retrieves relevant paintings based on the user's story. A key contribution of this thesis is the platform's ability to support structured clinical sessions, enabling practitioners to capture and "score" patient responses to provide a metric for engagement.
+                        </p>
+                        
+                        <h2>Research Goals</h2>
+                        <p>
+                            The prototype is intended for testing in future therapeutic and research settings as a scalable support tool. We evaluate the integrated system's retrieval effectiveness using FAISS and its user interaction design with a focus on accessibility. These findings highlight the potential of AI tools to support scalable and measurable cognitive stimulation in dementia care.
+                        </p>
+                        
+                        <h2>The Team</h2>
+                        <p>
+                            This work was undertaken at the University of São Paulo by Augusto B. V. Silva and Vinicius Alvarenga, in collaboration with researchers at Université Catholique de Louvain. The project represents a bridge between computer science, healthcare, and art history, demonstrating the interdisciplinary potential of AI in therapeutic contexts.
+                        </p>
+                        
+                        <h2>Technology Stack</h2>
+                        <p>
+                            ArtEvoke integrates several cutting-edge technologies:
+                        </p>
+                        <ul style="margin-left: 2rem; color: #555; line-height: 1.8;">
+                            <li><strong>Large Multimodal Models (LMMs)</strong> for understanding visual and textual content</li>
+                            <li><strong>Large Language Models (LLMs)</strong> for story generation and narrative creation</li>
+                            <li><strong>FAISS Vector Search</strong> for efficient similarity-based artwork retrieval</li>
+                            <li><strong>Embedding Models</strong> for semantic understanding of stories and artwork descriptions</li>
+                            <li><strong>Curated Art Databases</strong> including WikiArt, SemArt, and museum collections</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Augusto B. V. Silva, Vinicius Alvarenga. All rights reserved.</p>
+                <p>Université Catholique de Louvain | University of São Paulo</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling and section navigation
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = {
+            'home': document.getElementById('home-section'),
+            'about': document.getElementById('about-section')
+        };
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const section = this.dataset.section;
+                
+                // Update active state
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Show/hide sections
+                Object.keys(sections).forEach(key => {
+                    if (key === section) {
+                        sections[key].classList.remove('hidden');
+                    } else {
+                        sections[key].classList.add('hidden');
+                    }
+                });
+                
+                // Scroll to top smoothly
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
